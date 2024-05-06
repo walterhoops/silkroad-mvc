@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-silkroadmvc-f8c50a95-ddcb-4d38-b03c-7c9a92b76b90</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\SeedData.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="obj\Debug\net7.0\silkroadmvc.AssemblyInfo.cs" />
+    <Compile Include="obj\Debug\net7.0\silkroadmvc.GlobalUsings.g.cs" />
+    <Compile Include="obj\Debug\net7.0\silkroadmvc.MvcApplicationPartsAssemblyInfo.cs" />
+    <Compile Include="obj\Debug\net7.0\silkroadmvc.RazorAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="obj\Debug\net7.0\silkroadmvc.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\project.assets.json" />
+    <Content Include="obj\silkroadmvc.csproj.nuget.dgspec.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.16" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.16" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.18">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="bin\Debug\net7.0\" />
+    <Folder Include="obj\Debug\net7.0\refint\" />
+    <Folder Include="obj\Debug\net7.0\ref\" />
+    <Folder Include="obj\Debug\net7.0\staticwebassets\" />
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="obj\Debug\net7.0\silkroadmvc.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\net7.0\silkroadmvc.assets.cache" />
+    <None Include="obj\Debug\net7.0\silkroadmvc.csproj.AssemblyReference.cache" />
+    <None Include="obj\Debug\net7.0\silkroadmvc.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\net7.0\silkroadmvc.GeneratedMSBuildEditorConfig.editorconfig" />
+    <None Include="obj\Debug\net7.0\silkroadmvc.MvcApplicationPartsAssemblyInfo.cache" />
+    <None Include="obj\Debug\net7.0\silkroadmvc.RazorAssemblyInfo.cache" />
+    <None Include="obj\project.nuget.cache" />
+    <None Include="obj\silkroadmvc.csproj.nuget.g.props" />
+    <None Include="obj\silkroadmvc.csproj.nuget.g.targets" />
+  </ItemGroup>
+
+</Project>
