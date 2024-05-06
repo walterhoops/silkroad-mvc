@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -16,13 +17,15 @@ namespace silkroadmvc.Controllers
     {
         private readonly IAuctionsService _auctionsService;
         private readonly IBidsService _bidsService;
+        private readonly ICommentsService _commentsService;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public AuctionsController(IAuctionsService auctionsService, IWebHostEnvironment webHostEnvironment, IBidsService bidsService)
+        public AuctionsController(IAuctionsService auctionsService, IWebHostEnvironment webHostEnvironment, IBidsService bidsService, ICommentsService commentsService)
         {
             _auctionsService = auctionsService;
             _webHostEnvironment = webHostEnvironment;
             _bidsService = bidsService;
+            _commentsService = commentsService;
         }
 
         // GET: Auctions
@@ -30,12 +33,21 @@ namespace silkroadmvc.Controllers
         {
             var applicationDbContext = _auctionsService.GetAll();
             int pageSize = 3;
-            if(!string.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
                 applicationDbContext = applicationDbContext.Where(a => a.Title.Contains(searchString));
                 return View(await PaginatedList<Auction>.CreateAsync(applicationDbContext.Where(a => a.IsSold == false).AsNoTracking(), pageNumber ?? 1, pageSize));
             }
             return View(await PaginatedList<Auction>.CreateAsync(applicationDbContext.Where(a => a.IsSold == false).AsNoTracking(), pageNumber ?? 1, pageSize));
+        }
+
+        // GET: My Auctions - Show auctions created by the user
+        public async Task<IActionResult> MyAuctions(int? pageNumber)
+        {
+            var applicationDbContext = _auctionsService.GetAll();
+            int pageSize = 3;
+            
+            return View("Index", await PaginatedList<Auction>.CreateAsync(applicationDbContext.Where(a => a.IdentityUserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Auctions/Details/5
@@ -59,7 +71,7 @@ namespace silkroadmvc.Controllers
         // GET: Auctions/Create
         public IActionResult Create()
         {
-           
+
             return View();
         }
 
@@ -70,7 +82,7 @@ namespace silkroadmvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AuctionVM auction)
         {
-            if(auction.Image != null)
+            if (auction.Image != null)
             {
                 string fileName = auction.Image.FileName;
                 string filePath = Path.Combine("Images", fileName);
@@ -91,10 +103,12 @@ namespace silkroadmvc.Controllers
             }
             return View(auction);
         }
+
+        // Add Bids
         [HttpPost]
         public async Task<ActionResult> AddBid([Bind("Id, Price, AuctionId, IdentityUserId")] Bid bid)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 await _bidsService.Add(bid);
             }
@@ -103,11 +117,25 @@ namespace silkroadmvc.Controllers
             await _auctionsService.SaveChanges();
             return View("Details", auction);
         }
+
+        // Close Bidding
         public async Task<ActionResult> CloseBidding(int id)
         {
             var auction = await _auctionsService.GetById(id);
             auction.IsSold = true;
             await _auctionsService.SaveChanges();
+            return View("Details", auction);
+        }
+
+        // POST: Auctions/AddComment
+        [HttpPost]
+        public async Task<ActionResult> AddComment([Bind("Id, Content, AuctionId, IdentityUserId")] Comment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                await _commentsService.Add(comment);
+            }
+            var auction = await _auctionsService.GetById(comment.AuctionId);
             return View("Details", auction);
         }
         //// GET: Auctions/Edit/5

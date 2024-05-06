@@ -17,6 +17,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IAuctionsService, AuctionsService>();
 builder.Services.AddScoped<IBidsService, BidsService>(); 
+builder.Services.AddScoped<ICommentsService, CommentsService>();
 
 var app = builder.Build();
 
