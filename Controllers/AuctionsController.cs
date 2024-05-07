@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -36,6 +37,24 @@ namespace silkroadmvc.Controllers
                 return View(await PaginatedList<Auction>.CreateAsync(applicationDbContext.Where(a => a.IsSold == false).AsNoTracking(), pageNumber ?? 1, pageSize));
             }
             return View(await PaginatedList<Auction>.CreateAsync(applicationDbContext.Where(a => a.IsSold == false).AsNoTracking(), pageNumber ?? 1, pageSize));
+        }
+
+        // GET: Auctions/MyAuctions
+        public async Task<IActionResult> MyAuctions(int? pageNumber)
+        {
+            var applicationDbContext = _auctionsService.GetAll();
+            int pageSize = 3;
+
+            return View("Index", await PaginatedList<Auction>.CreateAsync(applicationDbContext.Where(a => a.IdentityUserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking(), pageNumber ?? 1, pageSize));
+        }
+
+        // GET: Bids/MyBids
+        public async Task<IActionResult> MyBids(int? pageNumber)
+        {
+            var applicationDbContext = _bidsService.GetAll();
+            int pageSize = 3;
+
+            return View(await PaginatedList<Bid>.CreateAsync(applicationDbContext.Where(a => a.IdentityUserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Auctions/Details/5
