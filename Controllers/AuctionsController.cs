@@ -42,12 +42,22 @@ namespace silkroadmvc.Controllers
         }
 
         // GET: My Auctions - Show auctions created by the user
+
         public async Task<IActionResult> MyAuctions(int? pageNumber)
         {
             var applicationDbContext = _auctionsService.GetAll();
             int pageSize = 3;
-            
+
             return View("Index", await PaginatedList<Auction>.CreateAsync(applicationDbContext.Where(a => a.IdentityUserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking(), pageNumber ?? 1, pageSize));
+        }
+
+        // GET: Bids/MyBids
+        public async Task<IActionResult> MyBids(int? pageNumber)
+        {
+            var applicationDbContext = _bidsService.GetAll();
+            int pageSize = 3;
+
+            return View(await PaginatedList<Bid>.CreateAsync(applicationDbContext.Where(a => a.IdentityUserId == User.FindFirstValue(ClaimTypes.NameIdentifier)).AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Auctions/Details/5
