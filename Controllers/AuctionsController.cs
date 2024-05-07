@@ -95,7 +95,7 @@ namespace silkroadmvc.Controllers
             if (auction.Image != null)
             {
                 string fileName = auction.Image.FileName;
-                string filePath = Path.Combine("Images", fileName);
+                string filePath = Path.Combine("/Images", fileName);
                 using (var fileStream = new FileStream(Path.Combine(_webHostEnvironment.WebRootPath, filePath), FileMode.Create))
                 {
                     auction.Image.CopyTo(fileStream);
