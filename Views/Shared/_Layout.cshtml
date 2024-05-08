@@ -17,18 +17,18 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Auctions" asp-action="Index"><i class="fa fa-solid fa-house"></i>Active Auctions</a>
+                            <a class="nav-link" asp-area="" asp-controller="Auctions" asp-action="Index"><i class="fa fa-solid fa-house" style="padding:3px"></i>Active Auctions</a>
                         </li>
                         @if(User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Auctions" asp-action="Create"><i class="fa fa-solid fa-plus"></i>Create Auction</a>
+                                <a class="nav-link" asp-area="" asp-controller="Auctions" asp-action="Create"><i class="fa fa-solid fa-plus" style="padding:3px"></i>Create Auction</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Auctions" asp-action="MyAuctions"><i class="fa fa-solid fa-newspaper"></i>My Auctions</a>
+                                <a class="nav-link" asp-area="" asp-controller="Auctions" asp-action="MyAuctions"><i class="fa fa-solid fa-newspaper" style="padding:3px"></i>My Auctions</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Auctions" asp-action="MyBids"><i class="fa fa-solid fa-sack-dollar"></i>My Bids</a>
+                                <a class="nav-link" asp-area="" asp-controller="Auctions" asp-action="MyBids"><i class="fa fa-solid fa-sack-dollar" style="padding:3px"></i>My Bids</a>
                             </li>
                         }
                         <li class="nav-item" style="margin:auto;">
