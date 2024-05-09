@@ -6,17 +6,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-silkroadmvc-f8c50a95-ddcb-4d38-b03c-7c9a92b76b90</UserSecretsId>
   </PropertyGroup>
-
+	
   <ItemGroup>
     <Compile Remove="Data\SeedData.cs" />
   </ItemGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <Compile Include="obj\Debug\net7.0\silkroadmvc.AssemblyInfo.cs" />
     <Compile Include="obj\Debug\net7.0\silkroadmvc.GlobalUsings.g.cs" />
     <Compile Include="obj\Debug\net7.0\silkroadmvc.MvcApplicationPartsAssemblyInfo.cs" />
     <Compile Include="obj\Debug\net7.0\silkroadmvc.RazorAssemblyInfo.cs" />
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <Content Include="obj\Debug\net7.0\silkroadmvc.csproj.FileListAbsolute.txt" />
